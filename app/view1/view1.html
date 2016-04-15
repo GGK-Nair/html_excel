@@ -1,0 +1,73 @@
+<table id="tbl1">
+    <thead>
+    <tr>
+        <th>Table_1_Heading_1</th>
+        <th>Table_1_Heading_2</th>
+        <th>Table_1_Heading_3</th>
+        <th>Table_1_Heading_4</th>
+        <th>Table_1_Heading_5</th>
+        <th>Table_1_Heading_6</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>Table_1_Data_1</td>
+        <td align="center" colspan="2">Merge1</td>
+        <td align="center" colspan="2">Merge2</td>
+        <td>Table_1_Data_1</td>
+
+    </tr>
+    <tr>
+        <td align="center" colspan="2">Table_1_Data_2</td>
+        <td>Table_1_Data_2</td>
+        <td align="center" colspan="2">Table_1_Data_2</td>
+        <td>Table_1_Data_2</td>
+
+    </tr>
+    </tbody>
+</table>
+
+<table id="tbl2">
+    <thead>
+    <tr>
+        <th>Table_2_Heading_1</th>
+        <th>Table_2_Heading_2</th>
+        <th>Table_2_Heading_3</th>
+        <th>Table_2_Heading_4</th>
+        <th>Table_2_Heading_5</th>
+        <th>Table_2_Heading_6</th>
+        <th>Table_2_Heading_7</th>
+        <th>Table_2_Heading_8</th>
+        <th>Table_2_Heading_9</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>Table_2_Data_1</td>
+        <td rowspan="2" colspan="2">Table_2_Data_2</td>
+
+        <td rowspan="2">Table_2_Data_4</td>
+        <td>Table_2_Data_5</td>
+        <td>Table_2_Data_6</td>
+        <td >Table_2_Data_7</td>
+        <td>Table_2_Data_8</td>
+        <td>Table_2_Data_9</td>
+
+    </tr>
+    <tr>
+        <td>Table_2_Data_1</td>
+        <td>Table_2_Data_5</td>
+        <td>Table_2_Data_6</td>
+        <td>Table_2_Data_7</td>
+        <td>Table_2_Data_8</td>
+        <td>Table_2_Data_9</td>
+
+    </tr>
+    </tbody>
+</table>
+
+<!--<button  ng-click="tablesToExcel(['tbl1','tbl2'], ['ProductDay1','ProductDay2'], 'SampleExcel.xls', 'Excel')">Export to Excel</button>-->
+<button ng-click="tablesToExcel_Dynamic()">Export to Excel</button>
+
+
+<!--tablesToExcel_Dynamic-->
