@@ -64,7 +64,7 @@ angular.module('myApp.view1', ['ngRoute'])
     // })
     .controller('View1Ctrl', function ($timeout, $scope) {
         $scope.tablesToExcel_Dynamic = function () {
-            var cellSpan = 0;
+
             var uri = 'data:application/vnd.ms-excel;base64,'
                 , tmplWorkbookXML = '<?xml version="1.0"?><?mso-application progid="Excel.Sheet"?><Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet" xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet">'
                 + '<DocumentProperties xmlns="urn:schemas-microsoft-com:office:office"><Author></Author><Created>{created}</Created></DocumentProperties>'
@@ -97,11 +97,14 @@ angular.module('myApp.view1', ['ngRoute'])
             var rowsXML = "";
             var colSpan = 0;
             var rowSpan = 0;
+            var k = 0
 
             var tables = document.getElementsByTagName('table');//get all the tables from DOM
 
             for (var i = 0; i < tables.length; i++) {
                 for (var j = 0; j < tables[i].rows.length; j++) {
+                    var cellSpan = 0;
+                    var flag = 0;
                     if (i > 0 && j == 0) {
                         var k = tables[i - 1].rows.length + 3;
                         rowsXML += '<Row ss:Index="' + k + '">';
@@ -109,28 +112,37 @@ angular.module('myApp.view1', ['ngRoute'])
                         rowsXML += '<Row>'
                     }
 
-                    for (var k = 0; k < tables[i].rows[j].cells.length; k++) {
+                    for (k = 0; k < tables[i].rows[j].cells.length; k++) {
+
                         // var dataType = tables[i].rows[j].cells[k].getAttribute("data-type");
                         var dataValue = tables[i].rows[j].cells[k].innerHTML;
                         colSpan = tables[i].rows[j].cells[k].colSpan - 1;
                         var align = tables[i].rows[j].cells[k].align.toLowerCase() || 'left';
                         rowSpan = tables[i].rows[j].cells[k].rowSpan - 1;
-
                         var cellSsIndex = '';
 
-                        if (j > 0 && angular.isDefined(tables[i].rows[j - 1].cells[k])) {
-                            if (tables[i].rows[(j - 1)].cells[k].rowSpan > 1 && k>cellSpan) {
+                        if (j > 0  && angular.isDefined(tables[i].rows[j - 1].cells[k])) {
+                            debugger
+                            if (tables[i].rows[(j - 1)].cells[k+cellSpan].rowSpan > 1 && k > cellSpan) {
+                                //cellSpan = k;
 
-                                cellSpan = k;
+                                flag = 1;
                                 do {
-
-                                    cellSpan++;
+                                    cellSpan++;debugger
                                 } while (angular.isDefined(tables[i].rows[(j - 1)].cells[cellSpan]) && tables[i].rows[(j - 1)].cells[cellSpan].rowSpan > 1);
+                                //cellSpanDummy
 
-                                cellSsIndex = 'ss:Index="' + (cellSpan + 1) + '"';
-                                //k=cellSpan;
+
+                                //k=cellSpan;;
+
                             }
 
+
+                        }
+
+                        if (cellSpan > 0) {
+                            cellSsIndex = 'ss:Index="' + (k + cellSpan ) + '"';
+                            debugger;
                         }
 
                         var dataType = typeof(dataValue);
